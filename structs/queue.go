@@ -1,17 +1,21 @@
 package structs
 
-type Queue struct {
-	head DoublyList
+type Queue[TData any] struct {
+	list DoublyList[TData]
 }
 
-func (queue *Queue) Push(data int) {
-	queue.head.PushBack(data)
+func (queue *Queue[TData]) Push(data TData) {
+	queue.list.PushBack(data)
 }
 
-func (queue *Queue) Pop() (value int) {
-	return queue.head.PopFront()
+func (queue *Queue[TData]) Pop() (value TData) {
+	return queue.list.PopFront()
 }
 
-func (queue *Queue) Print() {
-	queue.head.PrintDoublyList()
+func (queue *Queue[TData]) Print() {
+	queue.list.PrintDoublyList()
+}
+
+func (queue *Queue[TData]) IsEmpty() bool {
+	return queue.list.IsEmpty()
 }
