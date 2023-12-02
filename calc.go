@@ -16,8 +16,10 @@ func calculation(infixNotation string) (result int) {
 			if RPnotation.IsEmpty() {
 				RPnotation.Push(string(char))
 			} else {
-				if GetPriority(string(char)) >= GetPriority(RPnotation.Pick()) {
-					expression = append(expression, RPnotation.Pop())
+				if GetPriority(string(char)) <= GetPriority(RPnotation.Pick()) {
+					for !RPnotation.IsEmpty() {
+						expression = append(expression, RPnotation.Pop())
+					}
 				}
 				RPnotation.Push(string(char))
 			}
@@ -27,13 +29,13 @@ func calculation(infixNotation string) (result int) {
 		expression = append(expression, RPnotation.Pop())
 	}
 
-	//for i := range expression {
-	//	if unicode.IsDigit(rune(expression[i])) {
-	//		calcStack.Push(expression[i])
+	//for _, char := range expression {
+	//	if unicode.IsDigit(rune(char)) {
+	//		calcStack.Push(char)
 	//	} else {
 	//		op2 := calcStack.Pop()
 	//		op1 := calcStack.Pop()
-	//		switch expression[i] {
+	//		switch char {
 	//		case '+':
 	//			interRes := op1 + op2
 	//			calcStack.Push(interRes)
@@ -57,9 +59,11 @@ func calculation(infixNotation string) (result int) {
 func GetPriority(operation string) (priority int) {
 	switch operation {
 	case "+":
+		fallthrough
 	case "-":
 		return 1
 	case "*":
+		fallthrough
 	case "/":
 		return 2
 	}
