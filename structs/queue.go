@@ -19,3 +19,7 @@ func (queue *Queue[TData]) Print() {
 func (queue *Queue[TData]) IsEmpty() bool {
 	return queue.list.IsEmpty()
 }
+
+func (queue *Queue[TData]) Pick() TData {
+	return queue.list.Pick()
+}

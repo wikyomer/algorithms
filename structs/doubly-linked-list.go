@@ -20,7 +20,7 @@ func (doublyList *DoublyList[TData]) PrintDoublyList() {
 
 	current := doublyList.head
 	for current != nil {
-		fmt.Printf("%v\n", current.data)
+		fmt.Printf("%+v\n", current.data)
 		current = current.next
 	}
 }
@@ -74,4 +74,8 @@ func (doublyList *DoublyList[TData]) Insert(data TData, index int) {
 
 func (doublyList *DoublyList[TData]) IsEmpty() bool {
 	return doublyList.head == nil
+}
+
+func (doublyList *DoublyList[TData]) Pick() TData {
+	return doublyList.head.data
 }
